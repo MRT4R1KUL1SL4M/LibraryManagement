@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="p-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-3xl font-bold mb-6">My Borrow History</h2>
+
+    <!-- Borrow History Table -->
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="py-3 px-6 text-left">Book Title</th>
+                    <th class="py-3 px-6 text-left">Borrow Date</th>
+                    <th class="py-3 px-6 text-left">Due Date</th>
+                    <th class="py-3 px-6 text-left">Actual Return Date</th>
+                    <th class="py-3 px-6 text-center">Status</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-700">
+                {% for item in history %}
+                <tr class="border-b">
+                    <td class="py-3 px-6">{{ item.title }}</td>
+                    <td class="py-3 px-6">{{ item.borrow_date.strftime('%d-%m-%Y') }}</td>
+                    <td class="py-3 px-6">{{ item.due_date.strftime('%d-%m-%Y') }}</td>
+                    <td class="py-3 px-6">
+                        {% if item.return_date %}
+                            {{ item.return_date.strftime('%d-%m-%Y') }}
+                        {% else %}
+                            Not yet returned
+                        {% endif %}
+                    </td>
+                    <td class="py-3 px-6 text-center">
+                        {% if item.status == 'returned' %}
+                            <span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs">Returned</span>
+                        {% elif item.status == 'borrowed' %}
+                            <span class="bg-yellow-200 text-yellow-800 py-1 px-3 rounded-full text-xs">Borrowed</span>
+                        {% elif item.status == 'overdue' %}
+                            <span class="bg-red-200 text-red-800 py-1 px-3 rounded-full text-xs">Overdue</span>
+                        {% else %}
+                             <span class="bg-blue-200 text-blue-800 py-1 px-3 rounded-full text-xs">{{ item.status }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="text-center py-4">You have not borrowed any books yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

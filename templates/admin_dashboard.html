@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="p-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-3xl font-bold mb-6">Admin Dashboard</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card 1: Manage Books -->
+        <a href="{{ url_for('manage_books') }}" class="block p-6 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition">
+            <h3 class="text-xl font-semibold">Book Management</h3>
+            <p class="mt-2">Add, edit, or delete books.</p>
+        </a>
+        <!-- Card 2: Manage Users -->
+        <a href="{{ url_for('manage_users') }}" class="block p-6 bg-purple-500 text-white rounded-lg shadow hover:bg-purple-600 transition">
+            <h3 class="text-xl font-semibold">User Management</h3>
+            <p class="mt-2">Approve and manage users.</p>
+        </a>
+        <!-- Card 3: Borrow Requests (Future Feature) -->
+        <div class="p-6 bg-yellow-500 text-white rounded-lg shadow">
+            <h3 class="text-xl font-semibold">Borrow Requests</h3>
+            <p class="mt-2">View user book borrow requests. (Coming Soon)</p>
+        </div>
+        <!-- Card 4: Return Management (Future Feature) -->
+        <div class="p-6 bg-red-500 text-white rounded-lg shadow">
+            <h3 class="text-xl font-semibold">Returns & Fines</h3>
+            <p class="mt-2">Manage book returns and fines. (Coming Soon)</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="p-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-3xl font-bold mb-4">Library Books</h2>
+
+    <!-- Search Form -->
+    <form method="GET" action="{{ url_for('browse_books') }}" class="mb-6">
+        <div class="flex">
+            <input type="text" name="search" placeholder="Search by book, author, or category..." class="w-full px-3 py-2 border border-gray-300 rounded-l-md focus:ring-indigo-500 focus:border-indigo-500">
+            <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-r-md hover:bg-indigo-700">Search</button>
+        </div>
+    </form>
+
+    <!-- Books Table -->
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="py-3 px-6 text-left">Book Title</th>
+                    <th class="py-3 px-6 text-left">Author</th>
+                    <th class="py-3 px-6 text-left">Category</th>
+                    <th class="py-3 px-6 text-center">Copies Available</th>
+                    <th class="py-3 px-6 text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-700">
+                {% for book in books %}
+                <tr class="border-b">
+                    <td class="py-3 px-6">{{ book.title }}</td>
+                    <td class="py-3 px-6">{{ book.author }}</td>
+                    <td class="py-3 px-6">{{ book.category }}</td>
+                    <td class="py-3 px-6 text-center">{{ book.available_copies }}</td>
+                    <td class="py-3 px-6 text-center">
+                        {% if book.available_copies > 0 %}
+                            <a href="{{ url_for('borrow_book', book_id=book.id) }}" class="bg-green-500 text-white py-1 px-3 rounded hover:bg-green-600">Borrow</a>
+                        {% else %}
+                            <span class="bg-gray-400 text-white py-1 px-3 rounded cursor-not-allowed">Unavailable</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="text-center py-4">No books found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

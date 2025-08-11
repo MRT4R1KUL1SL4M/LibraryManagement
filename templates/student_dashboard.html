@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="p-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-3xl font-bold mb-6">Student Dashboard</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card 1: Browse Books -->
+        <a href="{{ url_for('browse_books') }}" class="block p-6 bg-indigo-500 text-white rounded-lg shadow hover:bg-indigo-600 transition">
+            <h3 class="text-xl font-semibold">Browse Books</h3>
+            <p class="mt-2">View and search for all books in the library.</p>
+        </a>
+        <!-- Card 2: Borrow History -->
+        <a href="{{ url_for('borrow_history') }}" class="block p-6 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition">
+            <h3 class="text-xl font-semibold">My Borrow History</h3>
+            <p class="mt-2">See a list of all the books you have borrowed.</p>
+        </a>
+        <!-- Card 3: Profile (Future Feature) -->
+        <div class="p-6 bg-gray-300 text-gray-600 rounded-lg shadow">
+            <h3 class="text-xl font-semibold">My Profile</h3>
+            <p class="mt-2">(Coming Soon)</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
